@@ -1,0 +1,122 @@
+<div class="panel panel-info">
+	<user-header ng-if="!admin"></user-header>
+	<admin-header ng-if="admin"></admin-header>
+
+
+	<div ng-if="admin || user">
+
+		<div>
+			<div class="form-group">
+				<label for="country" class="col-sm-2 control-label">Country</label>
+				<div class="col-xs-3">
+					<td><select ng-model="filter.country"
+						ng-options="key as value for (key , value) in countries"></select></td>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="playerType" class="col-sm-2 control-label">Player
+					Type</label>
+				<div class="col-xs-3">
+					<td><select ng-model="filter.playerType"
+						ng-options="key as value for (key , value) in playerTypes"></select></td>
+				</div>
+			</div>
+
+			<br /> <br />
+
+			<div class="form-group">
+				<label for="playerFirstName" class="col-sm-2 control-label">Player
+					First Name</label>
+				<div class="col-xs-3">
+					<input type="text" name="playerFirstName"
+						ng-model="filter.firstName" class="form-control edit">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="playerLastName" class="col-sm-2 control-label">Player
+					Last Name</label>
+				<div class="col-xs-3">
+					<input type="text" name="playerLastName" ng-model="filter.lastName"
+						class="form-control edit">
+				</div>
+			</div>
+
+
+			<br /> <br /> <br />
+
+			<div class="form-group">
+				<label for="playerValue" class="col-sm-2 control-label">Player
+					Value </label>
+				<div class="col-xs-3">
+					<input type="number" name="playerValue"
+						ng-model="filter.marketValue" class="form-control edit">
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label for="teamName" class="col-sm-2 control-label">Team
+					Name </label>
+				<div class="col-xs-3">
+					<input type="text" name="teamName" ng-model="filter.teamName"
+						class="form-control edit">
+				</div>
+			</div>
+
+			<br /> <br /> <br />
+
+			<div class="form-group">
+				<div class="col-xs-3">
+					<button type="button" class="btn btn-success"
+						ng-click="clearFilters()">Clear</button>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-3">
+					<button type="button" class="btn btn-success" ng-click="search()">Search</button>
+				</div>
+			</div>
+
+		</div>
+
+		<br /> <br /> <br />
+
+
+
+		<div>Player Details :</div>
+		<div>
+			<table class="table">
+				<tr>
+					<td>First Name</td>
+					<td>Last Name</td>
+					<td>Country</td>
+					<td>Age</td>
+					<td>Market Value</td>
+					<td>Player Type</td>
+					<td>Player Owner</td>
+					<td>Current Team Name</td>
+				</tr>
+				<tr ng-repeat="player in filterData">
+					<td>{{player.firstName}}</td>
+					<td>{{player.lastName}}</td>
+					<td>{{countries[player.country]}}</td>
+					<td>{{player.age}}</td>
+					<td>{{player.marketValue}}</td>
+					<td>{{playerTypes[player.playerType]}}</td>
+					<td>{{player.owner}}</td>
+					<td>{{player.teamName}}</td>
+					<td>
+						<button type="button" ng-hide="player.presentOnTransferList"
+							class="btn btn-success" ng-click="addToTransferList(player.id)">Send
+							to Transfer List</button>
+						<button type="button" ng-disabled="canBuyPlayer(player.id)" class="btn btn-success"
+							ng-click="buyPlayer(player.id)">Buy Player</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

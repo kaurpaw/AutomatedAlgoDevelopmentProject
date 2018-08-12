@@ -1,0 +1,61 @@
+<div class="panel panel-info">
+	<user-header ng-if="!admin"></user-header>
+	<admin-header ng-if="admin"></admin-header>
+
+
+	<div ng-if="admin || user">
+
+		<div style="position: relative">
+			<button type="button" class="btn btn-success"
+				style="position: absolute; right: 0; bottom: 1px"
+				ng-click="saveChanges(team)">Save Changes</button>
+		</div>
+
+		<div>
+			<table class="table">
+				<tr>
+					<th>Team Name</th>
+					<th>Team Country</th>
+					<th>Team Value</th>
+					<th>Team Budget</th>
+				</tr>
+				<tr>
+					<td><input type="text" name="teamName"
+						ng-model="team.teamName" class="form-control" /></td>
+					<td><select ng-model="team.country"
+						ng-options="key as value for (key , value) in countries"></select></td>
+					<td>{{team.teamValue}}</td>
+					<td><input type="text" name="teamBudget"
+						ng-model="team.teamBudget" class="form-control" /></td>
+				</tr>
+			</table>
+		</div>
+
+		<div>Player Details :</div>
+		<div>
+			<table class="table">
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Country</th>
+					<th>Age</th>
+					<th>Market Value</th>
+					<th>Player Type</th>
+				</tr>
+				<tr ng-repeat="player in team.players">
+					<td><input type="text" name="firstName"
+						ng-model="player.firstName" class="form-control" /></td>
+					<td><input type="text" name="lastName"
+						ng-model="player.lastName" class="form-control" /></td>
+					<td><select ng-model="player.country"
+						ng-options="key as value for (key , value) in countries"></select></td>
+					<td>{{player.age}}</td>
+					<td><input type="text" name="lastName"
+						ng-model="player.marketValue" class="form-control" /></td>
+					<td><select ng-model="player.playerType"
+						ng-options="key as value for (key , value) in playerTypes"></select></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
